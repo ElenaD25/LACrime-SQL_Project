@@ -112,3 +112,5 @@ update ReportedCrime set Victim_Race =
 --58,
 --59
 --)
+
+select * from ReportedCrime;
