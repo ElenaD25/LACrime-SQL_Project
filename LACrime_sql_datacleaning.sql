@@ -94,23 +94,26 @@ update ReportedCrime set Victim_Race =
 
 -- delete rows with mysterios occured_time hours
 
---delete from reportedcrime where Occured_Time in (
---26,
---27,
---28,
---29,
---36,
---37,
---38,
---39,
---46,
---47,
---48,
---49,
---56,
---57,
---58,
---59
---)
+delete from reportedcrime where occured_time >= 25 and len(occured_time) =2;
 
-select * from ReportedCrime;
+alter table reportedcrime alter column occured_time nvarchar(10);
+
+update reportedcrime set occured_time =
+	case 
+		when len(occured_time) = 1 then concat(occured_time, ':00')
+		when len(occured_time) = 2 then concat(occured_time, ':00')
+		when len(occured_time) = 3 then concat(left(occured_time, 1),':', right(occured_time,2))
+		when len(occured_time) = 4 then concat(left(occured_time, 2),':', right(occured_time,2))
+	end;
+
+
+
+update ReportedCrime set location =  
+	case
+		when len(location) < 10 then location
+		else replace(trim(concat(trim(left(location, len(location) - len(right(location, 2)))),' ', right(location, 2))),'  ',' ')
+end;
+
+
+select top 1000 * from reportedcrime;
+
