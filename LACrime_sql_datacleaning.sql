@@ -33,10 +33,16 @@ EXEC sp_rename 'ReportedCrime.LOCATION', 'Location', 'COLUMN';
 EXEC sp_rename 'ReportedCrime.LAT', 'Lat', 'COLUMN';
 EXEC sp_rename 'ReportedCrime.LON', 'Lon', 'COLUMN';
 
+
+------ I. Data cleaning ------
+
+--- search and replace NULLs --- 
+
 -- check if we have NULL values in our data
 
-exec NullValueInspector @table = 'ReportedCrime'
+exec NullValueInspector @table = 'ReportedCrime' --- NullValueInspector is a stored procedure that can be found in SQL-scripts repo on my GitHub
 
+-- after finding all the columns that contained NULLs, we replace them with different values (it isn't recommended to have NULLs, especially when preparing data for further analysis)
 update ReportedCrime set Victim_Genre = 'Unknown' where Victim_Genre is null;
 update ReportedCrime set Victim_Race = 'Unknown' where Victim_Race is null;
 update ReportedCrime set Crime_Location_Code = '0' where Crime_Location_Code is null;
@@ -44,18 +50,20 @@ update ReportedCrime set Crime_Location_Desc = 'Unknown' where Crime_Location_De
 update ReportedCrime set Weapon_Used_Code = '0' where Weapon_Used_Code is null;
 update ReportedCrime set Weapon_Desc = 'Unknown' where Weapon_Desc is null;
 
+
 ---check again for null values
-exec NullValueInspector @table = 'ReportedCrime' -- nothing to see here
+exec NullValueInspector @table = 'ReportedCrime' -- nothing to see here, result = 0
 
 
--- search for duplicate values
-select ID, count(ID) --> NO DUPLICATES :D
+--- search for duplicate values ---
+
+select ID, count(ID) --> NO DUPLICATES (YAY)
 from  ReportedCrime
 group by ID
 having count(ID) > 1
 
 
--- replace single character values with the full version of it (eq: F-female, B-black for race, and many more)
+-- substitute abbreviated or single-character values with their corresponding full versions. For example, replace 'F' with 'female,' and 'B' with 'black' for the race variable, among others
 
 select distinct victim_genre from ReportedCrime;
 
@@ -92,7 +100,7 @@ update ReportedCrime set Victim_Race =
 	end
 
 
--- delete rows with mysterios occured_time hours
+-- delete the rows with mystery times in the occurred_time column and change its data type
 
 delete from reportedcrime where occured_time >= 25 and len(occured_time) =2;
 
@@ -107,6 +115,7 @@ update reportedcrime set occured_time =
 	end;
 
 
+--- remove the extra spaces in the LOCATION column
 
 update ReportedCrime set location =  
 	case
