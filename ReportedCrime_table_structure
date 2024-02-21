@@ -1,0 +1,25 @@
+USE TESTS; --- my database
+
+CREATE TABLE [dbo].[ReportedCrime](
+	[ID] [bigint] NULL PRIMARY KEY,
+	[Reported_Date] [datetime] NULL,
+	[Occured_Date] [datetime] NULL,
+	[Occured_Time] [nvarchar](10) NULL,
+	[Area_Code] [float] NULL,
+	[Area] [nvarchar](255) NULL,
+	[District_No] [int] NULL,
+	[Crime_Code] [float] NULL,
+	[Crime_Desc] [nvarchar](255) NULL,
+	[Victim_Age] [float] NULL,
+	[Victim_Genre] [nvarchar](255) NULL,
+	[Victim_Race] [nvarchar](255) NULL,
+	[Crime_Location_Code] [float] NULL,
+	[Crime_Location_Desc] [nvarchar](255) NULL,
+	[Weapon_Used_Code] [float] NULL,
+	[Weapon_Desc] [nvarchar](255) NULL,
+	[Status] [nvarchar](255) NULL,
+	[Status_Desc] [nvarchar](255) NULL,
+	[Location] [nvarchar](255) NULL,
+	[Lat] [float] NULL,
+	[Lon] [float] NULL
+)

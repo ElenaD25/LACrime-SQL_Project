@@ -123,6 +123,15 @@ update ReportedCrime set location =
 		else replace(trim(concat(trim(left(location, len(location) - len(right(location, 2)))),' ', right(location, 2))),'  ',' ')
 end;
 
+update reportedcrime set crime_desc =
+CONCAT(UPPER(SUBSTRING(crime_desc, 1, 1)), LOWER(SUBSTRING(crime_desc, 2, LEN(crime_desc))));
 
-select top 1000 * from reportedcrime;
+update reportedcrime set location =
+CONCAT(UPPER(SUBSTRING(location, 1, 1)), LOWER(SUBSTRING(location, 2, LEN(location))));
+
+update reportedcrime set weapon_desc =
+CONCAT(UPPER(SUBSTRING(weapon_desc, 1, 1)), LOWER(SUBSTRING(weapon_desc, 2, LEN(weapon_desc))));
+
+update reportedcrime set location =
+CONCAT(UPPER(SUBSTRING(location, 1, 1)), LOWER(SUBSTRING(location, 2, LEN(location))));
 
