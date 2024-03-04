@@ -9,8 +9,6 @@ select column_name, data_type from information_schema.columns
 where table_name = 'ReportedCrime';
 
 
-
-
 ----it's always better to have a backup table
 select * 
 into ReportedCrime_bkp
@@ -128,6 +126,14 @@ update ReportedCrime set occured_time =
 		when len(occured_time) = 4 then concat(left(occured_time, 2),':', right(occured_time,2))
 	end;
 
+update reportedcrime set occured_time = format(try_convert(datetime,trim(occured_time)),'hh:mm tt', 'en-US') ;
+
+update reportedcrime set occured_time = '12:00 AM'  WHERE OCCURED_TIME IS NULL;
+
+---- keep only the date into date columns (occured_date, reported_date)
+
+alter table reportedcrime alter column occured_date date;
+alter table reportedcrime alter column reported_date date;
 
 --- capitalize values in Crime_desc and Weapon_desc columns
 
@@ -172,3 +178,16 @@ JOIN cte_location ON cte_location.location = tgt.location;
 
 --- check the lastest version of my table
 select * from ReportedCrime;
+
+
+--- drop rows where victim_age < 0
+select victim_age, count(*) from reportedcrime group by victim_age order by victim_age;
+
+delete from reportedcrime where victim_age < 0;
+
+select column_name, data_type
+from information_schema.columns
+where table_name = 'reportedcrime'
+
+select top 100 * from reportedcrime;
+
