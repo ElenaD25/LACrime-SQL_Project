@@ -14,6 +14,12 @@ select *
 into ReportedCrime_bkp
 from ReportedCrime;
 
+select count(*) as Records from ReportedCrime_bkp ;
+
+select column_name, data_type 
+from information_schema.columns
+where table_name = 'ReportedCrime_bkp'
+
 ---IT's show time
 
 -- drop the columns that you don't need
@@ -132,8 +138,8 @@ update reportedcrime set occured_time = '12:00 AM'  WHERE OCCURED_TIME IS NULL;
 
 ---- keep only the date into date columns (occured_date, reported_date)
 
-alter table reportedcrime alter column occured_date date;
-alter table reportedcrime alter column reported_date date;
+alter table reportedcrime alter column occured_date date; --convert from datettime to date
+alter table reportedcrime alter column reported_date date; --convert from datettime to date
 
 --- capitalize values in Crime_desc and Weapon_desc columns
 
@@ -184,10 +190,3 @@ select * from ReportedCrime;
 select victim_age, count(*) from reportedcrime group by victim_age order by victim_age;
 
 delete from reportedcrime where victim_age < 0;
-
-select column_name, data_type
-from information_schema.columns
-where table_name = 'reportedcrime'
-
-select top 100 * from reportedcrime;
-
