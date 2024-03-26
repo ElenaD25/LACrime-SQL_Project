@@ -1,6 +1,6 @@
 <h2>LA Crimes </h2>
 
-<h3> Introcudtion</h3>
+<h3> Introduction</h3>
 The LA police are facing a significant challenge when it comes to reducing the number of incidents reported from 2020 to the present. To make informed decisions about firing more agents, doing something about the weapons law, strengthening patrols, and any other actions. The police from LA have turned to you to help them identify the reasons why the number of crimes increased like crazy. So, they entrusted you with a comprehensive dataset that contains all the records about the incidents that took place in LA and are waiting for you to come up with some conclusions and help them make important decisions when it comes to reducing those kinds of incidents and protecting the residents.
 
 <h4><b>Dataset format:</b></h4>
@@ -85,5 +85,18 @@ Through this analysis, our goal is to unravel mysteries and address the most pre
 <hr></hr>
 
 <h3>💁‍♀️ Conclusion and Insights</h3>
+
+<p>After finishing the EDA I came up with the following conclusions:</p>
+<ol>
+    <!--<li> The top three most vulnerable races based on the frequency of attacks in Los Angeles (LA), with Hispanics being the most frequently attacked group, followed by White and Black individuals. In the first place are Hispanics who represent a percent of almost 31 out of the total reported cases. </li>
+    <li> The statistics showed that not having strict laws anyone could own a gun, which led to multiple reported cases where one of the used weapons was a physical force, followed unfortunately by weapons, verbal threats, and handguns</li> 
+    <li> </li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>-->
+</ol>
 
 
